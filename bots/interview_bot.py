@@ -5,6 +5,8 @@ from bots.base_bot import (
 
 class InterviewBot(BaseBot):
 
+    capability_tags = ()
+
     SYSTEM_PROMPT = """
     You are a professional technical interviewer.
     

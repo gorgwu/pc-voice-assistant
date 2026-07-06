@@ -5,6 +5,9 @@ from ai.memory import (
 
 class BaseBot:
 
+    capability_tags = ()
+    tool_names = ()
+
     def __init__(
         self,
         name: str,
@@ -18,13 +21,26 @@ class BaseBot:
             system_prompt
         )
 
+        self.capabilities = (
+            set(self.capability_tags)
+        )
+
         self.tools = (
-            tools or []
+            list(tools)
+            if tools is not None
+            else list(self.tool_names)
         )
 
         self.memory = (
             ConversationMemory()
         )
+
+    def has_capability(
+        self,
+        tag: str
+    ) -> bool:
+
+        return tag in self.capabilities
 
     def build_prompt(
         self,

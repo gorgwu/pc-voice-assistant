@@ -7,6 +7,13 @@ class TextFileBot(
     BaseBot
 ):
 
+    capability_tags = ("tools",)
+    tool_names = (
+        "create_text_file",
+        "summarize_text_file",
+        "edit_text_file"
+    )
+
     SYSTEM_PROMPT = """
     You are a text file assistant.
 

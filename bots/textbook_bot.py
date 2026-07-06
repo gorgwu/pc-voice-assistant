@@ -5,6 +5,8 @@ from bots.base_bot import (
 
 class TextbookBot(BaseBot):
 
+    capability_tags = ("rag",)
+
     SYSTEM_PROMPT = """
     You are a helpful textbook assistant.
 

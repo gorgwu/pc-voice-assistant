@@ -1,3 +1,4 @@
+import importlib
 import json
 
 from ai.gemini_client import GeminiClient
@@ -8,40 +9,110 @@ from audio.transcriber import AudioTranscriber
 from speech.tts import TextToSpeech
 from speech.player import AudioPlayer
 
-from bots.interview_bot import InterviewBot
-from bots.textbook_bot import TextbookBot
-from bots.textfile_bot import TextFileBot
-
-from rag.vector_store import VectorStore
-from rag.retriever import Retriever
-from rag.index_manager import IndexManager
-
-from tools.tool_registry import ToolRegistry
-
 from utils.config_loader import ConfigLoader
 from utils.file_cleanup import clean_recordings
 from utils.config_selector import select_config
+
+
+BOT_REGISTRY = {
+    "interview": (
+        "bots.interview_bot",
+        "InterviewBot"
+    ),
+    "textbook": (
+        "bots.textbook_bot",
+        "TextbookBot"
+    ),
+    "textfile": (
+        "bots.textfile_bot",
+        "TextFileBot"
+    )
+}
 
 
 def create_bot(
     bot_name: str
 ):
 
-    if bot_name == "interview":
-        return InterviewBot()
-
-    elif bot_name == "textbook":
-        return TextbookBot()
-
-    elif bot_name == "textfile":
-        return TextFileBot()
-
-    else:
+    if bot_name not in BOT_REGISTRY:
 
         raise Exception(
             f"Unknown bot: "
             f"{bot_name}"
         )
+
+    module_name, class_name = (
+        BOT_REGISTRY[bot_name]
+    )
+
+    module = importlib.import_module(
+        module_name
+    )
+
+    bot_class = getattr(
+        module,
+        class_name
+    )
+
+    return bot_class()
+
+
+def setup_tools(bot):
+
+    from tools.tool_registry import (
+        ToolRegistry
+    )
+
+    registry = ToolRegistry()
+
+    tool_descriptions = (
+        registry.get_tool_descriptions(
+            bot.tools
+        )
+    )
+
+    return registry, tool_descriptions
+
+
+def setup_rag(config, bot):
+
+    pdf_path = config.get(
+        "pdf",
+        ""
+    )
+
+    if not pdf_path:
+        return None
+
+    from rag.index_manager import (
+        IndexManager
+    )
+    from rag.vector_store import (
+        VectorStore
+    )
+    from rag.retriever import (
+        Retriever
+    )
+
+    index_manager = IndexManager()
+
+    if index_manager.needs_rebuild(
+        pdf_path
+    ):
+
+        index_manager.build_index(
+            pdf_path
+        )
+
+    else:
+
+        print(
+            "\nUsing existing FAISS index..."
+        )
+
+    vector_store = VectorStore().load_index()
+
+    return Retriever(vector_store)
 
 
 def main():
@@ -66,54 +137,27 @@ def main():
         config["bot"]
     )
 
-    # Tool Registry
+    # Optional Tooling
 
-    registry = (
-        ToolRegistry()
-    )
+    registry = None
+    tool_descriptions = ""
 
-    tool_descriptions = (
-        registry.get_tool_descriptions(
-            bot.tools
+    if bot.has_capability("tools"):
+
+        registry, tool_descriptions = (
+            setup_tools(bot)
         )
-    )
 
     # Optional RAG
 
     retriever = None
 
-    pdf_path = config.get(
-        "pdf",
-        ""
-    )
-
-    if pdf_path:
-
-        index_manager = (
-            IndexManager()
-        )
-
-        if index_manager.needs_rebuild(
-            pdf_path
-        ):
-
-            index_manager.build_index(
-                pdf_path
-            )
-
-        else:
-
-            print(
-                "\nUsing existing FAISS index..."
-            )
-
-        vector_store = (
-            VectorStore().load_index()
-        )
+    if bot.has_capability("rag"):
 
         retriever = (
-            Retriever(
-                vector_store
+            setup_rag(
+                config,
+                bot
             )
         )
 
