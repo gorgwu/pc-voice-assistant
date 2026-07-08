@@ -8,12 +8,14 @@
 ### Windows
 
 ```powershell
+cd voice-assistant
 python -m venv venv
 ```
 
 ### Linux / macOS
 
 ```bash
+cd voice-assistant
 python3 -m venv venv
 ```
 
@@ -51,7 +53,7 @@ Create a `.env` file in the project root:
 GEMINI_API_KEY=your_api_key_here
 ```
 
-Note: Models can be configured in `config.py`
+Note: Models can be configured in `voice-assistant/config.py`
 
 ## 5. Optional: Add Spotify Credentials
 
@@ -64,9 +66,11 @@ SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
 SPOTIFY_USERNAME=your_spotify_username
 ```
 
-You will also need a Spotify Developer app and the `spotipy` package installed via `requirements.txt`.
+You will also need a Spotify Developer app to fill in those credentials.
 
 ## 6. Run the Application
+
+Run directly from the voice-assistant subdirectory:
 
 ```bash
 python main.py
@@ -90,7 +94,7 @@ Textbook Bot is currently the only bot with access to the RAG system. It can rea
 
 ## Textfile Bot
 
-Textfile Bot has access to the tooling system. It can read/write new or existing .txt files in `workspace/`, and will create the folder if it does not exist. Helpful to create reminders or quick text files. As the system is built on Gemini, it can also translate and save the user's input into text in another language.
+Textfile Bot has access to the tooling system. It can read/write new or existing .txt files in `voice-assistant/workspace/`, and will create the folder if it does not exist. Helpful to create reminders or quick text files. As the system is built on Gemini, it can also translate and save the user's input into text in another language.
 
 ## Music Bot
 
@@ -98,11 +102,11 @@ Music Bot has also has access to the tooling system, and adds Spotify control th
 
 # Config Files
 
-Additional versions of each bot can be configured in `configs/`. See `configs/README.md` for additional instructions.
+Additional versions of each bot can be configured in `voice-assistant/configs/`. See `voice-assistant/configs/README.md` for additional instructions.
 
 # Documents
 
-Documents (currently only PDFs) shoul be put in `documents/` to be read by a bot that can access the RAG system.
+Documents (currently only PDFs) should be put in `voice-assistant/documents/` to be read by a bot that can access the RAG system.
 
 # License
 

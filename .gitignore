@@ -1,7 +1,7 @@
-venv/
+voice-assistant/venv/
 __pycache__/
 *.pyc
 .env
-recordings/
-faiss_index/
-workspace/
+voice-assistant/recordings/
+voice-assistant/faiss_index/
+voice-assistant/workspace/
