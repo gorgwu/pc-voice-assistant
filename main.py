@@ -26,6 +26,10 @@ BOT_REGISTRY = {
     "textfile": (
         "bots.textfile_bot",
         "TextFileBot"
+    ),
+    "music": (
+        "bots.music_bot",
+        "MusicBot"
     )
 }
 

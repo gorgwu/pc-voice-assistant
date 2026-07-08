@@ -53,7 +53,20 @@ GEMINI_API_KEY=your_api_key_here
 
 Note: Models can be configured in `config.py`
 
-## 5. Run the Application
+## 5. Optional: Add Spotify Credentials
+
+If you want to use the music bot, add these environment variables as well:
+
+```env
+SPOTIFY_CLIENT_ID=your_spotify_client_id
+SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
+SPOTIFY_USERNAME=your_spotify_username
+```
+
+You will also need a Spotify Developer app and the `spotipy` package installed via `requirements.txt`.
+
+## 6. Run the Application
 
 ```bash
 python main.py
@@ -77,7 +90,11 @@ Textbook Bot is currently the only bot with access to the RAG system. It can rea
 
 ## Textfile Bot
 
-Textfile Bot is currently the only bot with access to the tooling system. It can read/write new or existing .txt files in `workspace/`, and will create the folder if it does not exist. Helpful to create reminders or quick text files. As the system is built on Gemini, it can also translate and save the user's input into text in another language.
+Textfile Bot has access to the tooling system. It can read/write new or existing .txt files in `workspace/`, and will create the folder if it does not exist. Helpful to create reminders or quick text files. As the system is built on Gemini, it can also translate and save the user's input into text in another language.
+
+## Music Bot
+
+Music Bot has also has access to the tooling system, and adds Spotify control through these tools. With Spotify credentials configured, it can search for songs, play a track, pause or resume playback, and report the currently playing track.
 
 # Config Files
 
