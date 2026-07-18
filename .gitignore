@@ -5,3 +5,5 @@ __pycache__/
 voice-assistant/recordings/
 voice-assistant/faiss_index/
 voice-assistant/workspace/
+voice-assistant-config-generator/node_modules/
+voice-assistant-config-generator/dist/

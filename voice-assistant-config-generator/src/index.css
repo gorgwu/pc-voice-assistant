@@ -1,0 +1,853 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+
+    --bg:#f7f3ef;
+
+    --surface:transparent;
+
+    --text:#171717;
+
+    --muted:#767676;
+
+    --line:#d8d2cb;
+
+    --primary:#171717;
+
+    --primary-hover:#444444;
+
+    --danger:#a94442;
+
+    --danger-hover:#8f3937;
+
+    --transition:.18s ease;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+
+    min-height:100%;
+}
+
+body{
+
+    font-family:"Plus Jakarta Sans",sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    -webkit-font-smoothing:antialiased;
+
+    line-height:1.5;
+}
+
+button,
+input,
+select{
+
+    font:inherit;
+}
+
+button{
+
+    cursor:pointer;
+}
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+}
+
+.app-shell{
+
+    max-width:1400px;
+
+    margin:0 auto;
+
+    padding:56px;
+}
+
+/* ==========================
+            HERO
+========================== */
+
+.hero{
+
+    margin-bottom:72px;
+}
+
+.hero h1{
+
+    font-size:4.5rem;
+
+    font-weight:800;
+
+    letter-spacing:-.08em;
+
+    line-height:.95;
+
+    margin-bottom:18px;
+}
+
+.hero p{
+
+    max-width:620px;
+
+    color:var(--muted);
+
+    font-size:1.05rem;
+
+    line-height:1.8;
+}
+
+/* ==========================
+          MESSAGE
+========================== */
+
+.message{
+
+    margin-bottom:40px;
+
+    padding-bottom:18px;
+
+    border-bottom:1px solid var(--line);
+
+    color:var(--muted);
+}
+
+/* ==========================
+          DASHBOARD
+========================== */
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:280px 1fr;
+
+    gap:90px;
+
+    align-items:start;
+}
+
+/* ==========================
+          GLOBAL
+========================== */
+
+h1,
+h2,
+h3,
+h4{
+
+    font-weight:700;
+
+    letter-spacing:-.03em;
+}
+
+small{
+
+    color:var(--muted);
+}
+
+hr{
+
+    border:none;
+
+    border-top:1px solid var(--line);
+}
+
+/* ==========================
+            SIDEBAR
+========================== */
+
+.sidebar{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.sidebar-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    margin-bottom:34px;
+
+    padding-bottom:18px;
+
+    border-bottom:1px solid var(--line);
+}
+
+.sidebar-header h2{
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+}
+
+.sidebar-header p{
+
+    display:none;
+}
+
+/* ---------- NEW BUTTON ---------- */
+
+.new-config-btn{
+
+    background:none;
+
+    border:none;
+
+    color:var(--text);
+
+    font-weight:600;
+
+    font-size:.95rem;
+
+    padding:0;
+
+    transition:opacity .18s ease;
+}
+
+.new-config-btn:hover{
+
+    opacity:.45;
+}
+
+/* ---------- SEARCH ---------- */
+
+.search-box{
+
+    background:none;
+
+    border:none;
+
+    border-bottom:1px solid var(--line);
+
+    border-radius:0;
+
+    padding:0 0 12px 0;
+
+    margin-bottom:32px;
+
+    color:var(--text);
+}
+
+.search-box::placeholder{
+
+    color:var(--muted);
+}
+
+.search-box:focus{
+
+    outline:none;
+
+    border-bottom-color:var(--text);
+}
+
+/* ---------- LIST ---------- */
+
+.config-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2px;
+
+    overflow-y:auto;
+
+    max-height:65vh;
+
+    padding-right:8px;
+}
+
+/* ---------- ITEM ---------- */
+
+.config-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 0;
+
+    cursor:pointer;
+
+    transition:
+        padding-left .18s ease,
+        color .18s ease,
+        opacity .18s ease;
+}
+
+.config-item:hover{
+
+    padding-left:10px;
+}
+
+/* ---------- SELECTED ---------- */
+
+.config-item.selected{
+
+    padding-left:16px;
+
+    position:relative;
+
+    font-weight:600;
+}
+
+.config-item.selected::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:50%;
+
+    width:6px;
+
+    height:6px;
+
+    background:var(--text);
+
+    border-radius:50%;
+
+    transform:translateY(-50%);
+}
+
+/* ---------- ICON ---------- */
+
+.file-icon{
+
+    display:none;
+}
+
+/* ---------- TEXT ---------- */
+
+.file-details{
+
+    overflow:hidden;
+}
+
+.config-name{
+
+    font-size:1rem;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.config-file{
+
+    margin-top:2px;
+
+    font-size:.78rem;
+
+    color:var(--muted);
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+/* ---------- EMPTY ---------- */
+
+.empty-sidebar{
+
+    color:var(--muted);
+
+    padding:30px 0;
+
+    line-height:1.8;
+}
+
+.empty-folder{
+
+    display:none;
+}
+
+/* ==========================
+            EDITOR
+========================== */
+
+.editor{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.editor-header{
+
+    margin-bottom:56px;
+
+    padding-bottom:20px;
+
+    border-bottom:1px solid var(--line);
+}
+
+.editor-header h2{
+
+    font-size:2.8rem;
+
+    font-weight:700;
+
+    letter-spacing:-.05em;
+
+    margin-bottom:14px;
+}
+
+.editor-header p{
+
+    max-width:620px;
+
+    color:var(--muted);
+
+    line-height:1.8;
+}
+
+/* ==========================
+        FORM LAYOUT
+========================== */
+
+.editor-card{
+
+    background:none;
+
+    border:none;
+
+    padding:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:48px;
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.form-group label{
+
+    font-size:.82rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+    font-weight:700;
+
+    color:var(--muted);
+}
+
+/* ==========================
+            INPUTS
+========================== */
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    background:none;
+
+    border:none;
+
+    border-bottom:1px solid var(--line);
+
+    border-radius:0;
+
+    padding:18px 0;
+
+    font-size:1.15rem;
+
+    color:var(--text);
+
+    transition:
+        border-color .2s ease,
+        padding-left .2s ease;
+}
+
+.form-group input:hover,
+.form-group select:hover{
+
+    border-bottom-color:#a9a39d;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    outline:none;
+
+    border-bottom-color:var(--text);
+
+    padding-left:6px;
+
+    box-shadow:none;
+}
+
+.form-group input::placeholder{
+
+    color:#a3a3a3;
+}
+
+.form-group small{
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    font-size:.82rem;
+}
+
+.form-group code{
+
+    background:none;
+
+    border:none;
+
+    padding:0;
+
+    color:var(--text);
+
+    font-weight:600;
+}
+
+/* ==========================
+          BUTTONS
+========================== */
+
+.button-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:24px;
+
+    padding-top:40px;
+
+    border-top:none;
+}
+
+/* ---------- PRIMARY ---------- */
+
+.primary-btn{
+
+    background:none;
+
+    border:none;
+
+    padding:0;
+
+    color:var(--text);
+
+    font-size:1.05rem;
+
+    font-weight:600;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.primary-btn::after{
+
+    content:" →";
+}
+
+.primary-btn:hover{
+
+    transform:translateX(4px);
+
+    opacity:.7;
+}
+
+/* ---------- DELETE ---------- */
+
+.danger-btn{
+
+    background:none;
+
+    border:none;
+
+    padding:0;
+
+    color:var(--muted);
+
+    font-size:1rem;
+
+    transition:
+        color .2s ease,
+        opacity .2s ease;
+}
+
+.danger-btn:hover{
+
+    color:#b45b5b;
+}
+
+/* ==========================
+        SMALL DETAILS
+========================== */
+
+input::selection{
+
+    background:#d7d2cc;
+}
+
+select{
+
+    appearance:none;
+
+    cursor:pointer;
+}
+
+/* ==========================
+        SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+
+    width:6px;
+}
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#c8c2bc;
+
+    border-radius:999px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#b7b0a8;
+}
+
+/* Firefox */
+
+*{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:#c8c2bc transparent;
+}
+
+/* ==========================
+        SELECTION
+========================== */
+
+::selection{
+
+    background:#e6e0d9;
+
+    color:var(--text);
+}
+
+/* ==========================
+        TRANSITIONS
+========================== */
+
+button,
+input,
+select,
+.config-item{
+
+    transition:all .18s ease;
+}
+
+/* ==========================
+        RESPONSIVE
+========================== */
+
+@media (max-width:1100px){
+
+    .app-shell{
+
+        padding:40px 32px;
+    }
+
+    .dashboard{
+
+        grid-template-columns:1fr;
+
+        gap:64px;
+    }
+
+    .config-list{
+
+        max-height:320px;
+    }
+
+    .hero{
+
+        margin-bottom:56px;
+    }
+
+    .hero h1{
+
+        font-size:3.4rem;
+    }
+
+    .editor-header{
+
+        margin-bottom:42px;
+    }
+}
+
+@media (max-width:700px){
+
+    .app-shell{
+
+        padding:28px 22px;
+    }
+
+    .hero{
+
+        margin-bottom:44px;
+    }
+
+    .hero h1{
+
+        font-size:2.6rem;
+
+        line-height:1;
+    }
+
+    .hero p{
+
+        font-size:.95rem;
+    }
+
+    .dashboard{
+
+        gap:44px;
+    }
+
+    .sidebar-header{
+
+        margin-bottom:24px;
+    }
+
+    .editor-header{
+
+        margin-bottom:30px;
+    }
+
+    .editor-header h2{
+
+        font-size:2rem;
+    }
+
+    .editor-card{
+
+        gap:36px;
+    }
+
+    .button-row{
+
+        flex-direction:column-reverse;
+
+        align-items:flex-start;
+
+        gap:20px;
+    }
+
+    .primary-btn{
+
+        font-size:1rem;
+    }
+}
+
+/* ==========================
+        SUBTLE DETAILS
+========================== */
+
+.config-item{
+
+    border-bottom:1px solid transparent;
+}
+
+.config-item:hover{
+
+    border-bottom-color:var(--line);
+}
+
+.search-box::placeholder{
+
+    color:#9d948d;
+}
+
+input::placeholder{
+
+    color:#a7a099;
+}
+
+input,
+select{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+}
+
+button{
+
+    user-select:none;
+}
+
+/* ==========================
+        TYPOGRAPHY
+========================== */
+
+h1,
+h2,
+h3{
+
+    color:var(--text);
+}
+
+p{
+
+    color:var(--muted);
+}
