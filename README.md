@@ -111,7 +111,9 @@ Then visit:
 http://localhost:5173
 ```
 
-The React app writes config JSON files into `voice-assistant/configs/` and lets you view or delete them from the browser.
+The React app writes config JSON files into `voice-assistant/configs/` and lets you view or delete them from the browser:
+
+![Configuration Generator](assets/vacg.jpg)
 
 ## Backend Bots
 
